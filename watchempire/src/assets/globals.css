@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+
+.logo{
+    font-family: "Calligraffitti", cursive;
+}
+
+
+
+.count{
+    background-image: url('../assets/img/Count.jpg');
+    background-size: 100%;
+}
+
+.count .count_div{
+    background-color: rgb(44, 44, 44, .85);
+}
+
+.slide-transition {
+    animation: slide .2s linear;
+}
+
+@keyframes slider {
+    0%{
+        transform: rotateY('180deg');
+    }
+}
