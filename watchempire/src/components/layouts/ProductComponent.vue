@@ -1,10 +1,10 @@
 <template>
   <section class="w-full min-h-[33rem] bg-gray-300 p-1 pb-20">
     <div class="w-5/6 h-full m-auto mt-12 flex items-center justify-evenly">
-      <img class="w-2/5" src="../../assets/img/Citizen.png" />
+      <img class="w-2/5" src="../../assets/img/analogico2.png" />
       <div class="w-2/5 h-auto flex flex-col items-start">
-        <h2 class="text-4xl font-bold">Reloj pulsera Citizen</h2>
-        <h3 class="text-3xl text-cyan-600 my-3">$450000</h3>
+        <h2 class="text-4xl font-bold">Reloj pulsera analógico</h2>
+        <h3 class="text-3xl text-cyan-600 my-3">$250000</h3>
         <p class="text-base text-justify my-3">
           No solo es un reloj impresionante estéticamente, sino también un
           compañero confiable en cada aventura. Ya sea que estés explorando la

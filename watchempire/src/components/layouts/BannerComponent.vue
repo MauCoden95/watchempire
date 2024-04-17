@@ -6,7 +6,7 @@
                 <h2 class="text-white text-xl mt-5">Cronometrá tu vida con elegancia y precisión.</h2>
                 <a class="bg-cyan-600 hover:bg-cyan-300 duration-300 py-2 px-5 text-xl mt-8 rounded" href="">Comprar ahora</a>
             </div>
-            <img class="w-2/5" src="../../assets/img/Tissot.png"/>
+            <img class="w-2/5" src="../../assets/img/lujo2.png"/>
         </div>
     </section>
 </template>

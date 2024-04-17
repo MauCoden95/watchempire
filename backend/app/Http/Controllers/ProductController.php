@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -12,7 +13,22 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+    }
+
+    public function randomProducts()
+    {
+
+
+
+        $randomProducts = DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.id', 'categories.name as category_name', 'products.name', 'products.price', 'products.image', 'products.stock')
+            ->inRandomOrder()
+            ->take(6)
+            ->get();
+
+
+        return response()->json($randomProducts);
     }
 
     /**
