@@ -11,4 +11,5 @@ Route::get('/user', function (Request $request) {
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('/random-products', 'randomProducts');
+    Route::get('/one-product', 'oneProduct');
 });

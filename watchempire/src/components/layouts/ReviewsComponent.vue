@@ -31,7 +31,8 @@
         </p>
         <div class="w-full h-2/6 pt-3 flex items-center justify-between">
           <div class="w-2/5 h-full flex">
-            <img class="h-full rounded-full" alt="Persona" :src="'/src/assets/img/' + currentReview.image" />
+            <img class="h-full rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />
+            <!--<img class="h-full rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />-->
 
             <!-- <img class="h-full rounded-full" src="../../assets/img/Monica.jpeg" /> -->
 
