@@ -1,7 +1,7 @@
 <template>
   <section class="w-full min-h-[33rem] bg-gray-300 p-1 pb-20">
     <h2 class="text-center text-4xl my-10">Productos destacados</h2>
-    <div class="w-5/6 min-h-0 m-auto grid grid-cols-3 grid-rows-2 gap-11">
+    <div class="w-5/6 min-h-0 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-11">
       <div
         v-for="product in products"
         :key="product.id"

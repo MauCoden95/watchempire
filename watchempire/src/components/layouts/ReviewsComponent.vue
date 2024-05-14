@@ -1,7 +1,7 @@
 <template>
-  <section class="w-full h-[25rem] bg-zinc-800 p-0.5 pb-20">
-    <div class="w-5/6 h-full m-auto mt-12 flex items-center justify-evenly">
-      <div class="w-2/4 h-full flex flex-col items-start justify-center">
+  <section class="w-full min-h-[25rem] bg-zinc-800 p-0.5 pb-20">
+    <div class="w-5/6 h-full m-auto mt-12 flex flex-col lg:flex-row items-center justify-evenly">
+      <div class="w-full lg:w-2/4 h-full mb-5 flex flex-col items-start justify-center">
         <h3 class="text-white text-3xl mb-3">Que dicen nuestros clientes 😊</h3>
         <p class="text-white text-base">
           Explora opiniones genuinas de clientes satisfechos: la prueba de
@@ -23,15 +23,15 @@
         </div>
       </div>
 
-      <div class="card w-2/4 h-5/6 p-5 bg-zinc-700 rounded" ref="cardElement">
+      <div class="card w-full lg:w-2/4 h-5/6 lg:h-72 p-5 bg-zinc-700 rounded" ref="cardElement">
         <p
-          class="w-full h-4/6 text-justify border-b-2 pb-5 border-gray-300 text-white"
+          class="w-full h-4/6 text-justify border-b-2 pb-5 border-gray-300 text-white text-xs sm:text-base"
         >
           {{ currentReview.review }}
         </p>
-        <div class="w-full h-2/6 pt-3 flex items-center justify-between">
+        <div class="w-full h-1/6 md:h-2/6 pt-3 flex items-center justify-between">
           <div class="w-2/5 h-full flex">
-            <img class="h-full rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />
+            <img class="h-14 lg:h-20 rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />
             <!--<img class="h-full rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />-->
 
             <!-- <img class="h-full rounded-full" src="../../assets/img/Monica.jpeg" /> -->
@@ -40,10 +40,10 @@
               class="ml-3 text-xl font-bold flex flex-col justify-center text-white"
             >
               {{ currentReview.name }}
-              <span class="text-xl text-yellow-500" v-html="currentReview.stars"></span>
+              <span class="text-xs sm:text-xl text-yellow-500" v-html="currentReview.stars"></span>
             </h4>
           </div>
-          <i class="text-7xl text-yellow-500 fas fa-quote-right icon"></i>
+          <i class="text-5xl sm:text-7xl text-yellow-500 fas fa-quote-right icon"></i>
         </div>
         
       </div>

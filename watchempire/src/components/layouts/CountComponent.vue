@@ -1,9 +1,9 @@
 <template>
   <section class="count w-full h-64">
     <div class="count_div w-full h-full">
-      <div class="w-5/6 h-full m-auto bg-transparent flex items-center justify-between">
-        <h3 class="text-3xl text-white">Descuento del <span class="text-cyan-600">30%</span> en todos los productos</h3>
-        <div class="w-96 h-24 border-4 border-cyan-600 flex items-center justify-around">
+      <div class="w-5/6 h-full m-auto bg-transparent flex flex-col md:flex-row items-center justify-center md:justify-between">
+        <h3 class="text-xl lg:text-3xl text-white text-center md:text-left mb-5 lg:mb-0">Descuento del <span class="text-cyan-600">30%</span> en todos los productos</h3>
+        <div class="w-72 sm:w-80 lg:w-96 h-24 border-4 border-cyan-600 flex items-center justify-around">
           <h3 class="text-2xl text-white text-center">
             {{ days }}
             <span class="block text-sm text-cyan-600">Días</span>
@@ -41,7 +41,7 @@ export default {
     };
   },
   mounted() {
-    const futureDate = new Date('2024-04-21T23:59:59'); 
+    const futureDate = new Date('2024-05-21T23:59:59'); 
 
     
     setInterval(() => {
