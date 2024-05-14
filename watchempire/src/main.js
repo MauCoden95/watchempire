@@ -4,17 +4,26 @@ import '../src/assets/globals.css';
 import App from "./App.vue";
 
 
+
+
+
 //Componentes
 import HomeComponent from "../src/components/HomeComponent.vue";
+import ContactComponent from "../src/components/ContactComponent.vue";
 
 //Rutas
-const routes = [{ path: "/", component: HomeComponent }];
+const routes = [
+  { path: "/", component: HomeComponent },
+  { path: "/contacto", component: ContactComponent }
+];
 
 //Crear objeto rutas
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+
 
 const app = createApp(App);
 app.use(router);

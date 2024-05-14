@@ -63,7 +63,7 @@
       </div>
 
       <div class="w-full lg:w-3/12 h-full text-white lg:ml-8">
-        <h3 class="w-3/4 lg:m-auto text-2xl text-cyan-600">Posts</h3>
+        <h3 class="w-3/4 lg:m-auto text-2xl text-cyan-600 lg:mb-5">Posts</h3>
         <div class="w-3/4 h-auto lg:m-auto mt-3 flex items-center">
           <img class="w-2/6 h-16" src="../../assets/img/cartierwatch.jpg" />
           <h3 class="ml-4">

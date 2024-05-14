@@ -6,7 +6,6 @@
     <Count />
     <Product />    
     <Reviews />   
-    <Footer /> 
   </div>
 </template>
 
@@ -17,7 +16,6 @@ import Featured from "./layouts/FeaturedComponent.vue";
 import Count from "./layouts/CountComponent.vue";
 import Product from "./layouts/ProductComponent.vue";
 import Reviews from "./layouts/ReviewsComponent.vue";
-import Footer from "./layouts/FooterComponent.vue";
 
 export default {
   name: "HomeComponent",
@@ -27,8 +25,7 @@ export default {
     Featured,
     Count,
     Product,
-    Reviews,
-    Footer
+    Reviews
   },
   props: {
     msg: String,

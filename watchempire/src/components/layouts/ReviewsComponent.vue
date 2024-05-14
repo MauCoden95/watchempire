@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="card w-full lg:w-2/4 h-5/6 lg:h-72 p-5 bg-zinc-700 rounded" ref="cardElement">
+      <div class="card w-full lg:w-2/4 h-64 p-5 bg-zinc-700 rounded" ref="cardElement">
         <p
           class="w-full h-4/6 text-justify border-b-2 pb-5 border-gray-300 text-white text-xs sm:text-base"
         >
@@ -31,19 +31,19 @@
         </p>
         <div class="w-full h-1/6 md:h-2/6 pt-3 flex items-center justify-between">
           <div class="w-2/5 h-full flex">
-            <img class="h-14 lg:h-20 rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />
+            <img class="h-14 lg:h-16 rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />
             <!--<img class="h-full rounded-full" alt="Persona" :src="require('@/assets/img/' + currentReview.image)" />-->
 
             <!-- <img class="h-full rounded-full" src="../../assets/img/Monica.jpeg" /> -->
 
             <h4
-              class="ml-3 text-xl font-bold flex flex-col justify-center text-white"
+              class="ml-3 mt-3 lg:mb-4 text-xl font-bold flex flex-col justify-center text-white"
             >
               {{ currentReview.name }}
-              <span class="text-xs sm:text-xl text-yellow-500" v-html="currentReview.stars"></span>
+              <span class="w-20 md:w-auto text-xs sm:text-xl text-yellow-500" v-html="currentReview.stars"></span>
             </h4>
           </div>
-          <i class="text-5xl sm:text-7xl text-yellow-500 fas fa-quote-right icon"></i>
+          <i class="text-7xl mt-5 lg:mb-4 text-yellow-500 fas fa-quote-right icon"></i>
         </div>
         
       </div>
