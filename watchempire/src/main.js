@@ -12,6 +12,9 @@ import HomeComponent from "../src/components/HomeComponent.vue";
 import ContactComponent from "../src/components/ContactComponent.vue";
 import StoreComponent from "../src/components/StoreComponent.vue";
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 //Rutas
 const routes = [
   { path: "/", component: HomeComponent },
@@ -29,6 +32,8 @@ const router = createRouter({
 
 const app = createApp(App);
 app.use(router);
+
+app.use(VueSweetalert2);
 
 app.mount("#app");
 

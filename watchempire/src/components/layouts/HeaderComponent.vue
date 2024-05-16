@@ -7,7 +7,7 @@
 
       <nav
         id="nav"
-        :class="{ 'showMenu': nav, 'hiddenMenu': !nav }"
+        :class="{ showMenu: nav, hiddenMenu: !nav }"
         class="md:block absolute top-full md:relative md:top-0 w-full md:w-2/4 h-68 md:h-full"
       >
         <ul
@@ -32,7 +32,6 @@
               >Tienda</router-link
             >
           </li>
-         
 
           <li
             class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
@@ -56,13 +55,11 @@
         </ul>
       </nav>
 
-      <button @click="toggleUser"> 
+      <button @click="toggleUser">
         <i
           class="fas fa-user text-white hover:text-cyan-600 duration-300 text-xl md:text-xl lg:text-2xl"
         ></i>
       </button>
-
-      
 
       <button id="btn_menu" @click="toggleMenu" class="block md:hidden">
         <i
@@ -70,62 +67,151 @@
         ></i>
       </button>
 
-      <div :class="{ 'showUser': btnUser, 'hiddenUser': !btnUser }" class="absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg">
+      <div v-if="isLogged">
+        <div
+          :class="{ showUser: btnUser, hiddenUser: !btnUser }"
+          class="absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
+        >
+          <h3 class="text-center my-3">Bienvenido, {{user.name}}</h3>
+          <button
+            @click="handleLogout"
+            class="block w-5/6 m-auto my-3 text-xl rounded-lg bg-red-600 hover:bg-red-800 duration-300 text-center p-3"
+          >
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
+      <div v-else>
+        <form
+          @submit.prevent="handleSubmit"
+          :class="{ showUser: btnUser, hiddenUser: !btnUser }"
+          class="absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
+        >
           <h2 class="text-center text-2xl my-1">Login</h2>
-          <input class="block w-5/6 m-auto my-2 border border-gray-400 py-1 px-2" type="text" placeholder="Correo electrónico"/>
-          <input class="block w-5/6 m-auto my-2 border border-gray-400 py-1 px-2" type="password" placeholder="Contraseña"/>
-          <input class="cursor-pointer block w-5/6 m-auto my-2 duration-300 border bg-cyan-400 hover:bg-cyan-600 py-1 px-2" type="submit"/>
+          <input
+            v-model="data.email"
+            class="block w-5/6 m-auto my-2 border border-gray-400 py-1 px-2"
+            type="text"
+            placeholder="Correo electrónico"
+          />
+          <input
+            v-model="data.password"
+            class="block w-5/6 m-auto my-2 border border-gray-400 py-1 px-2"
+            type="password"
+            placeholder="Contraseña"
+          />
+          <input
+            class="cursor-pointer block w-5/6 m-auto my-2 duration-300 border bg-cyan-400 hover:bg-cyan-600 py-1 px-2"
+            type="submit"
+          />
           <h3 class="mt-4 mb-2 text-center">¿No tiene cuenta?</h3>
-          <a class="block w-auto text-center mb-3 text-cyan-900 hover:text-cyan-600 duration-300" href="#">Registrese acá</a>
+          <a
+            class="block w-auto text-center mb-3 text-cyan-900 hover:text-cyan-600 duration-300"
+            href="#"
+            >Registrese acá</a
+          >
+        </form>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "HeaderComponent",
   data() {
     return {
       nav: false,
-      btnUser: false
+      btnUser: false,
+      data: {
+        email: "",
+        password: "",
+      },
+      isLogged: false,
+      user: {}
     };
   },
   mounted() {
     if (window.innerWidth >= 768) {
-       this.nav = true;
+      this.nav = true;
+    }
+
+    if (localStorage.getItem("userData")) {
+      this.isLogged = true;
+      this.user = JSON.parse(localStorage.getItem("userData"));
     }
   },
   methods: {
     toggleMenu() {
       this.nav = !this.nav;
     },
-     toggleUser() {
-      this.btnUser = !this.btnUser;  
+    toggleUser() {
+      this.btnUser = !this.btnUser;
+    },
+    handleSubmit() {
+      console.log(this.data);
+      if (this.data.email == "" || this.data.password == "") {
+        this.$swal({
+          title: "Error!",
+          text: "Campos vacíos",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      } else {
+        axios
+          .post("http://127.0.0.1:8000/api/login", this.data)
+          .then((response) => {
+            if (response.data.status == 200) {
+              this.$swal.fire({
+                text: response.message,
+                title: "Login exitoso!!!",
+                icon: "success",
+              });
+
+              localStorage.setItem("token", response.data.token);
+              const userData = JSON.stringify(response.data.user);
+              localStorage.setItem("userData", userData);
+              setTimeout(() => {
+                this.$router.go("/");
+              }, 1000);
+            } else {
+              this.$swal.fire({
+                title: "Error",
+                text: "Credenciales incorrectas",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+              });
+            }
+          });
+      }
+    },
+    handleLogout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userData");
+      this.isLogged = false;
+      this.$router.go("/");
     },
   },
 };
 </script>
 
 <style>
-.hiddenMenu{
-    transition: all 600ms;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+.hiddenMenu {
+  transition: all 600ms;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 }
-.showMenu{
-    transition: all 600ms;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+.showMenu {
+  transition: all 600ms;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
-.hiddenUser{
-    transition: all 600ms;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+.hiddenUser {
+  transition: all 600ms;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 }
-.showUser{
-    transition: all 600ms;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+.showUser {
+  transition: all 600ms;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 </style>
-
-
-
-

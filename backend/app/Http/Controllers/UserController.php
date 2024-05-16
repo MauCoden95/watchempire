@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+
     public function register(Request $request){
         $data = $request->all();
         $validator = Validator::make($request->all(),[
@@ -63,10 +65,9 @@ class UserController extends Controller
         $token = Auth::attempt($credentials);
 
         if (!$token) {
-             return response()->json([
-                "status" => 400,
-                "success" => false,
-                "error" => "Credenciales incorrectas",
+            return response()->json([
+                'status' => 400,
+                'message' => 'Login fallido'
             ]);
         }
 
@@ -78,6 +79,8 @@ class UserController extends Controller
             'user' => $user,
             'token' => $token
         ]);
+
+       
         
     }
 
