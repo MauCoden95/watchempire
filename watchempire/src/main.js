@@ -10,11 +10,13 @@ import App from "./App.vue";
 //Componentes
 import HomeComponent from "../src/components/HomeComponent.vue";
 import ContactComponent from "../src/components/ContactComponent.vue";
+import StoreComponent from "../src/components/StoreComponent.vue";
 
 //Rutas
 const routes = [
   { path: "/", component: HomeComponent },
-  { path: "/contacto", component: ContactComponent }
+  { path: "/contacto", component: ContactComponent },
+  { path: "/tienda", component: StoreComponent }
 ];
 
 //Crear objeto rutas

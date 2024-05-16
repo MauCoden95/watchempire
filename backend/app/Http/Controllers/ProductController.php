@@ -15,6 +15,14 @@ class ProductController extends Controller
     {
     }
 
+    public function allProducts()
+    {
+        $allProducts = Product::all();
+        
+        return response()->json($allProducts);
+    }
+
+
     public function randomProducts()
     {
         $randomProducts = DB::table('products')

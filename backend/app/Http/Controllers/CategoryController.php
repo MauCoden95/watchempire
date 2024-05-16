@@ -15,6 +15,54 @@ class CategoryController extends Controller
         //
     }
 
+    public function getAnalogicalWatchs()
+    {
+        $category = Category::where('name', 'Reloj analógico')->first();
+
+        if ($category) {
+            $products = $category->products;
+            
+            
+            return response()->json($category);
+        }
+    }
+
+    public function getWallWatchs()
+    {
+        $category = Category::where('name', 'Reloj de Pared')->first();
+
+        if ($category) {
+            $products = $category->products;
+            
+            
+            return response()->json($category);
+        }
+    }
+
+    public function getLuxuryWatchs()
+    {
+        $category = Category::where('name', 'Reloj de Lujo')->first();
+
+        if ($category) {
+            $products = $category->products;
+            
+            
+            return response()->json($category);
+        }
+    }
+
+    public function getSmartWatchs()
+    {
+        $category = Category::where('name', 'Smartwatch')->first();
+
+        if ($category) {
+            $products = $category->products;
+            
+            
+            return response()->json($category);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */

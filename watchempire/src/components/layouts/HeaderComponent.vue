@@ -27,7 +27,7 @@
             class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
           >
             <router-link
-              to="/"
+              to="/tienda"
               class="text-xl md:text-xs lg:text-base text-white hover:text-cyan-600"
               >Tienda</router-link
             >
