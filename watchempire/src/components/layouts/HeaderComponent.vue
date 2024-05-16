@@ -32,15 +32,7 @@
               >Tienda</router-link
             >
           </li>
-          <li
-            class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
-          >
-            <router-link
-              to="/"
-              class="text-xl md:text-xs lg:text-base text-white hover:text-cyan-600"
-              >Categorías</router-link
-            >
-          </li>
+         
 
           <li
             class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"

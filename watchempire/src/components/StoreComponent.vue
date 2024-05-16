@@ -2,34 +2,34 @@
   <div>
     <h2 class="text-4xl text-center my-16">Tienda</h2>
     <section
-      class="w-4/6 h-20 p-1.5 m-auto mb-12 rounded-full bg-gray-400 flex gap-2 items-center justify-between"
+      class="w-4/6 min-h-0 lg:h-20 p-1.5 m-auto mb-12 rounded-xl lg:rounded-full bg-gray-400 flex flex-col lg:flex-row gap-2 items-center justify-between"
     >
       <button
         @click="changeCategory(1)"
-        class="w-[20%] h-full rounded-l-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
+        class="w-full lg:w-[20%] h-full py-3 rounded-md lg:rounded-l-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
       >
         Todos
       </button>
       <button
         @click="changeCategory(2)"
-        class="w-[20%] h-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
+        class="w-full lg:w-[20%] h-full py-3 rounded-md lg:rounded-none bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
       >
         Analógico
       </button>
       <button
         @click="changeCategory(3)"
-        class="w-[20%] h-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
+        class="w-full lg:w-[20%] h-full py-3 rounded-md lg:rounded-none bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
       >
         Pared
       </button>
       <button
         @click="changeCategory(4)"
-        class="w-[20%] h-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
+        class="w-full lg:w-[20%] h-full py-3 rounded-md lg:rounded-none bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
       >
         Lujo
       </button>
       <button @click="changeCategory(5)"
-        class="w-[20%] h-full rounded-r-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
+        class="w-full lg:w-[20%] h-full py-3 rounded-md lg:rounded-r-full bg-gray-100 hover:bg-cyan-300 focus:bg-cyan-700 duration-300 text-xl"
       >
         Smartwatch
       </button>

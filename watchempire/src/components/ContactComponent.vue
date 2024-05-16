@@ -103,7 +103,7 @@
             >Mensaje</label
           >
           <textarea class="w-full h-44 p-5 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"></textarea>
-            <button class="float-right bg-black hover:bg-gray-900 mt-5 text-white text-xl rounded py-3 px-8"><i class="fas fa-arrow-right"></i> Enviar</button>
+            <button class="float-right bg-black hover:bg-gray-900 mt-5 text-white text-xl rounded py-3 px-8"><i class="fas fa-arrow-right "></i> Enviar</button>
         </div>
       </div>
 

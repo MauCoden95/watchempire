@@ -22,3 +22,4 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('/luxury', 'getLuxuryWatchs');
     Route::get('/smartwatch', 'getSmartWatchs');
 });
+

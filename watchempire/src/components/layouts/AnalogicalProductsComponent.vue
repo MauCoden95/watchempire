@@ -1,5 +1,5 @@
 <template>
-  <section class="w-5/6 h-auto m-auto mb-12 grid gap-5 grid-cols-3">
+  <section class="w-5/6 h-auto m-auto mb-12 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
     <div
       v-for="product in products"
       :key="product.id"
@@ -25,11 +25,11 @@
       >
       <div class="w-full min-h-0 mb-5 flex items-center justify-around">
         <button
-          class="bg-cyan-500 hover:bg-cyan-400 rounded-sm duration-300 py-3 px-5"
+          class="bg-cyan-500 hover:bg-cyan-400 text-sm lg:text-base rounded-sm duration-300 py-3 px-5"
         >
           Añadir <i class="fas fa-shopping-cart"></i>
         </button>
-        <p class="text-cyan-600 text-center text-2xl">{{ product.price }} $</p>
+        <p class="text-cyan-600 text-center text-xl lg:text-2xl">{{ product.price }} $</p>
         <button
           class="border border-cyan-600 py-2 px-3 hover:bg-cyan-400 duration-300"
         >
