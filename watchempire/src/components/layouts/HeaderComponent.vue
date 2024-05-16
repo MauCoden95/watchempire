@@ -55,7 +55,7 @@
         </ul>
       </nav>
 
-      <button @click="toggleUser">
+      <button class="absolute right-0" @click="toggleUser">
         <i
           class="fas fa-user text-white hover:text-cyan-600 duration-300 text-xl md:text-xl lg:text-2xl"
         ></i>
@@ -73,6 +73,11 @@
           class="absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
         >
           <h3 class="text-center my-3">Bienvenido, {{user.name}}</h3>
+           <router-link @click="btnUser = false"
+              to="/carrito"
+              class="block w-5/6 m-auto my-3 text-xl rounded-lg bg-gray-300 hover:bg-gray-400 duration-300 text-center p-3"
+              >Mi carrito</router-link
+            >
           <button
             @click="handleLogout"
             class="block w-5/6 m-auto my-3 text-xl rounded-lg bg-red-600 hover:bg-red-800 duration-300 text-center p-3"
