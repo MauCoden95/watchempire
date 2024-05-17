@@ -12,6 +12,7 @@ import HomeComponent from "../src/components/HomeComponent.vue";
 import ContactComponent from "../src/components/ContactComponent.vue";
 import StoreComponent from "../src/components/StoreComponent.vue";
 import CartComponent from '../src/components/CartComponent.vue';
+import RegisterComponent from '../src/components/RegisterComponent';
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -21,7 +22,8 @@ const routes = [
   { path: "/", component: HomeComponent },
   { path: "/contacto", component: ContactComponent },
   { path: "/tienda", component: StoreComponent },
-  { path: "/carrito", component: CartComponent }
+  { path: "/carrito", component: CartComponent },
+  { path: "/registro", component: RegisterComponent },
 ];
 
 //Crear objeto rutas

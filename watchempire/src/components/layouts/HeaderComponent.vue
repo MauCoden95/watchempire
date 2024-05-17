@@ -110,11 +110,16 @@
             type="submit"
           />
           <h3 class="mt-4 mb-2 text-center">¿No tiene cuenta?</h3>
-          <a
+          <router-link
+            @click="btnUser = false"
             class="block w-auto text-center mb-3 text-cyan-900 hover:text-cyan-600 duration-300"
-            href="#"
-            >Registrese acá</a
+            to="/registro"
+            >Registrese acá</router-link
           >
+
+          
+        
+             
         </form>
       </div>
     </div>
@@ -193,6 +198,7 @@ export default {
       }
     },
     handleLogout() {
+      this.btnUser = false;
       localStorage.removeItem("token");
       localStorage.removeItem("userData");
       this.isLogged = false;
