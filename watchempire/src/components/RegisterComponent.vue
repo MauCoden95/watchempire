@@ -1,34 +1,52 @@
 <template>
-  <div class="bg-gray-100 p-[1px]">
+  <div class="bg-gray-50 p-[1px]">
     <h2 class="text-4xl text-center my-16">Registro</h2>
     <section
-      class="w-5/6 min-h-0 lg:min-h-0 py-20 m-auto mb-12 flex flex-col lg:flex-row gap-2 items-start justify-between"
+      class="w-full lg:w-5/6 min-h-0 lg:min-h-0 lg:py-20 m-auto mb-12 flex flex-col lg:flex-row gap-2 items-start justify-between"
     >
       <form
         @submit.prevent="handleSubmit"
-        class="w-3/6 h-auto flex flex-col items-center"
+        class="w-full lg:w-3/6 h-auto flex flex-col items-center"
       >
         <input
           v-model="form.name"
-          class="w-5/6 my-3 py-3 px-2 bg-gray-300 text-gray-800"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
           type="text"
           placeholder="Nombre completo..."
         />
         <input
           v-model="form.email"
-          class="w-5/6 my-3 py-3 px-2 bg-gray-300 text-gray-800"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
           type="email"
           placeholder="Correo Electrónico..."
         />
         <input
+          v-model="form.dni"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
+          type="number"
+          placeholder="Documento..."
+        />
+        <input
+          v-model="form.address"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
+          type="text"
+          placeholder="Dirección..."
+        />
+        <input
+          v-model="form.phone"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
+          type="number"
+          placeholder="Teléfono..."
+        />
+        <input
           v-model="form.password"
-          class="w-5/6 my-3 py-3 px-2 bg-gray-300 text-gray-800"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
           type="password"
           placeholder="Contraseña..."
         />
         <input
           v-model="form.confirmPassword"
-          class="w-5/6 my-3 py-3 px-2 bg-gray-300 text-gray-800"
+          class="w-5/6 my-3 py-3 px-2 bg-gray-300 placeholder-gray-500 text-gray-800"
           type="password"
           placeholder="Confirmar Contraseña..."
         />
@@ -40,7 +58,7 @@
       </form>
 
       <img
-        class="w-3/6 md:w-3/6 lg:w-2/5"
+        class="w-full lg:w-2/5"
         src="../assets/img/register-image.svg"
       />
     </section>
@@ -57,6 +75,9 @@ export default {
       form: {
         name: "",
         email: "",
+        dni: "",
+        address: "",
+        phone: "",
         password: "",
         confirmPassword: "",
       },
@@ -68,6 +89,9 @@ export default {
       if (
         this.form.name === "" ||
         this.form.email === "" ||
+        this.form.dni === "" ||
+        this.form.address === "" ||
+        this.form.phone === "" ||
         this.form.password === "" ||
         this.form.confirmPassword === ""
       ) {
@@ -107,6 +131,9 @@ export default {
 
               this.form.name = "";
               this.form.email = "";
+              this.form.dni = "";
+              this.form.address = "";
+              this.form.phone = "";
               this.form.password = "";
               this.form.confirmPassword = "";
             } else {

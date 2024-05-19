@@ -37,6 +37,12 @@ class ProductController extends Controller
         return response()->json($randomProducts);
     }
 
+    public function dataProduct($id){
+        $product = Product::find($id);
+
+        return response()->json($product);
+    }
+
 
     public function oneProduct()
     {
