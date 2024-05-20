@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desired;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,21 @@ class DesiredController extends Controller
     public function getDesiredProducts($user_id)
     {
         $desiredProducts = Desired::where('user_id', $user_id)->pluck('product_id');
+        return response()->json($desiredProducts);
+    }
+
+    public function getDesiredProductsByUserId($user_id)
+    {
+        $user = User::find($user_id);
+
+        
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        
+        $desiredProducts = $user->desireds()->get();
+
         return response()->json($desiredProducts);
     }
 

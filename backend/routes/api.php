@@ -29,6 +29,7 @@ Route::controller(CategoryController::class)->group(function () {
 Route::controller(DesiredController::class)->group(function () {
     Route::post('/toggle-desired/{user_id}/{product_id}', 'toggleDesired');
     Route::get('/desired-products/{user_id}', [DesiredController::class, 'getDesiredProducts']);
+    Route::get('/get-desired-products-by-userid/{user_id}', [DesiredController::class, 'getDesiredProductsByUserId']);
 });
 
 

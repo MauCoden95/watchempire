@@ -30,11 +30,12 @@
           Añadir <i class="fas fa-shopping-cart"></i>
         </button>
         <p class="text-cyan-600 text-center text-xl lg:text-2xl">{{ product.price }} $</p>
-        <button
-          class="border border-cyan-600 py-2 px-3 hover:bg-cyan-400 duration-300"
-        >
-          <i class="fas fa-heart"></i>
-        </button>
+         <button
+            @click="toggleDesired(product.id)"
+            :class="['border', 'border-cyan-600', 'py-2', 'px-3', 'hover:bg-cyan-400', 'duration-300', { 'text-red-500': isDesired(product.id) }]"
+          >
+            <i class="fas fa-heart"></i>
+          </button>
       </div>
     </div>
   </section>
@@ -47,9 +48,12 @@ export default {
   data() {
     return {
       products: [],
+      user_id: "",
+      desiredProducts: [],
     };
   },
   mounted() {
+    this.user_id = JSON.parse(localStorage.getItem("userData")).id;
     this.allProducts();
   },
   methods: {
@@ -62,7 +66,26 @@ export default {
         .catch((error) => {
           console.error("Error:", error);
         });
+    },    
+    toggleDesired(product_id) {
+      axios
+        .post(`http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`)
+        .then((response) => {
+          console.log(response);
+          if (this.isDesired(product_id)) {
+            this.desiredProducts = this.desiredProducts.filter(id => id !== product_id);
+          } else {
+            this.desiredProducts.push(product_id);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+    isDesired(product_id) {
+      return this.desiredProducts.includes(product_id);
     },
   },
+  
 };
 </script>
