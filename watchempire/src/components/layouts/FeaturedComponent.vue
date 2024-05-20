@@ -7,7 +7,7 @@
         :key="product.id"
         class="relative bg-gray-200 p-2 rounded shadow-md"
       >
-         <router-link :to="`/producto/${product.id}`">
+        <router-link :to="`/producto/${product.id}`">
           <i class="cursor-pointer duration-300 absolute top-2 left-3 fas fa-info-circle text-3xl text-cyan-600 hover:text-cyan-800"></i>
         </router-link>
         <p
@@ -37,7 +37,10 @@
           <p class="text-cyan-600 text-center text-2xl">
             {{ product.price }} $
           </p>
-          <button class="border border-cyan-600 py-2 px-3 hover:bg-cyan-400 duration-300">
+          <button
+            @click="toggleDesired(product.id)"
+            :class="['border', 'border-cyan-600', 'py-2', 'px-3', 'hover:bg-cyan-400', 'duration-300', { 'text-red-500': isDesired(product.id) }]"
+          >
             <i class="fas fa-heart"></i>
           </button>
         </div>
@@ -54,9 +57,13 @@ export default {
   data() {
     return {
       products: [],
+      user_id: "",
+      desiredProducts: [],
     };
   },
   mounted() {
+    this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+
     axios
       .get("http://127.0.0.1:8000/api/random-products")
       .then((response) => {
@@ -65,6 +72,35 @@ export default {
       .catch((error) => {
         console.error("Error:", error);
       });
+
+    axios
+      .get(`http://127.0.0.1:8000/api/desired-products/${this.user_id}`)
+      .then((response) => {
+        this.desiredProducts = response.data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  },
+  methods: {
+    toggleDesired(product_id) {
+      axios
+        .post(`http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`)
+        .then((response) => {
+          console.log(response);
+          if (this.isDesired(product_id)) {
+            this.desiredProducts = this.desiredProducts.filter(id => id !== product_id);
+          } else {
+            this.desiredProducts.push(product_id);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+    isDesired(product_id) {
+      return this.desiredProducts.includes(product_id);
+    },
   },
 };
 </script>
