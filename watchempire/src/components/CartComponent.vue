@@ -81,8 +81,9 @@
             <input
               id="default-checkbox"
               type="radio"
-              value=""
+              value="free"
               name="shopping"
+              v-model="check"
               checked
               class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
@@ -97,8 +98,9 @@
             <input
               id="checked-checkbox"
               type="radio"
-              value=""
+              value="shopping"
               name="shopping"
+              v-model="check"
               class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
             <label
@@ -112,13 +114,14 @@
 
         <div class="w-2/5 h-full px-5 flex flex-col items-start justify-center">
           <h3 class="w-5/6 p-3">
-            Subtotal: <span class="float-right font-bold">240000 $</span>
+            Subtotal:
+            <span class="float-right font-bold">{{ totalSubtotal }} $</span>
           </h3>
           <h3 class="w-5/6 p-3 my-5">
-            Envío: <span class="float-right font-bold">Gratis</span>
+            Envío: <span class="float-right font-bold">{{ totalMessage }}</span>
           </h3>
           <h2 class="w-5/6 p-3 bg-cyan-400 rounded-lg">
-            TOTAL: <span class="float-right font-bold">240000 $</span>
+            TOTAL: <span class="float-right font-bold">{{ total }} $</span>
           </h2>
         </div>
       </div>
@@ -136,6 +139,7 @@ export default {
     return {
       token: localStorage.getItem("token"),
       cart: [],
+      check: 1,
     };
   },
   mounted() {
@@ -147,24 +151,48 @@ export default {
   },
   methods: {
     deleteItem(productId) {
-      let find = this.cart.findIndex((item) => item.id == productId);
-      this.cart.splice(find, 1);
-      localStorage.setItem("cart", JSON.stringify(this.cart));
+      const findIndex = this.cart.findIndex((item) => item.id === productId);
+      if (findIndex !== -1) {
+        this.cart.splice(findIndex, 1);
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+      }
     },
-    addQuantity(productId){
+    addQuantity(productId) {
       let find = this.cart.find((item) => item.id == productId);
       find.quantity++;
-      console.log(find);
+      find.subtotal = find.quantity * find.price;
     },
-    removeQuantity(productId){
+    removeQuantity(productId) {
       let find = this.cart.find((item) => item.id == productId);
-      
-      if(find.quantity == 1){
-        find.quantity == 1;
-      }else{
-        find.quantity--;
-      }     
-    }
+
+      find.quantity == 1 ? find.quantity == 1 : find.quantity--;
+      find.subtotal = find.quantity * find.price;
+    },
+  },
+  computed: {
+    totalSubtotal() {
+      return this.cart.reduce((accumulator, currentItem) => {
+        return accumulator + currentItem.subtotal;
+      }, 0);
+    },
+    total() {
+      if (this.check === "free") {
+        return this.totalSubtotal;
+      } else if (this.check === "shopping") {
+        return this.totalSubtotal * 1.2;
+      } else {
+        return this.totalSubtotal;
+      }
+    },
+    totalMessage() {
+      if (this.check === "free") {
+        return "Gratis";
+      } else if (this.check === "shopping") {
+        return "20% de recargo";
+      } else {
+        return "Gratis";
+      }
+    },
   },
 };
 </script>
