@@ -27,6 +27,7 @@
       >
       <div class="w-full min-h-0 mb-5 flex items-center justify-around">
         <button
+          @click="addToCart(product)"
           class="bg-cyan-500 hover:bg-cyan-400 text-sm lg:text-base rounded-sm duration-300 py-3 px-5"
         >
           Añadir <i class="fas fa-shopping-cart"></i>
@@ -83,26 +84,84 @@ export default {
         });
     },
     toggleDesired(product_id) {
-      axios
-        .post(
-          `http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`
-        )
-        .then((response) => {
-          console.log(response);
-          if (this.isDesired(product_id)) {
-            this.desiredProducts = this.desiredProducts.filter(
-              (id) => id !== product_id
-            );
-          } else {
-            this.desiredProducts.push(product_id);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      if (localStorage.getItem("userData")) {
+        axios
+          .post(
+            `http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`
+          )
+          .then((response) => {
+            console.log(response);
+            if (this.isDesired(product_id)) {
+              this.desiredProducts = this.desiredProducts.filter(
+                (id) => id !== product_id
+              );
+            } else {
+              this.desiredProducts.push(product_id);
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }else{
+           this.$swal.fire({
+            title: "Debe estar logueado para añadir a la lista de deseados",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+      }
     },
     isDesired(product_id) {
       return this.desiredProducts.includes(product_id);
+    },
+    addToCart(product) {
+      if (localStorage.getItem("userData")) {
+        if (product.stock != 0) {
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+          if (!Array.isArray(cart)) {
+            cart = [];
+          }
+
+          let found = cart.find((item) => item.id === product.id);
+
+          if (found) {
+            found.quantity += 1;
+            found.subtotal = found.quantity * product.price;
+            this.$swal.fire({
+              title: "Producto agregado al carrito!!!",
+              icon: "success",
+            });
+          } else {
+            cart.push({
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              quantity: 1,
+              subtotal: product.price,
+              image: product.image,
+            });
+            this.$swal.fire({
+              title: "Producto agregado al carrito!!!",
+              icon: "success",
+            });
+          }
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+          console.log(JSON.parse(localStorage.getItem("cart")));
+        } else {
+          this.$swal.fire({
+            title: "No hay stock para ese producto",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
+      }else{        
+           this.$swal.fire({
+            title: "Debe estar logueado para agregar productos al carrito",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+      }
     },
   },
 };
