@@ -1,14 +1,18 @@
 <template>
   <section class="w-full min-h-[33rem] bg-gray-300 p-1 pb-20">
     <h2 class="text-center text-4xl my-10">Productos destacados</h2>
-    <div class="w-5/6 min-h-0 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-11">
+    <div
+      class="w-5/6 min-h-0 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-11"
+    >
       <div
         v-for="product in products"
         :key="product.id"
         class="relative bg-gray-200 p-2 rounded shadow-md"
       >
         <router-link :to="`/producto/${product.id}`">
-          <i class="cursor-pointer duration-300 absolute top-2 left-3 fas fa-info-circle text-3xl text-cyan-600 hover:text-cyan-800"></i>
+          <i
+            class="cursor-pointer duration-300 absolute top-2 left-3 fas fa-info-circle text-3xl text-cyan-600 hover:text-cyan-800"
+          ></i>
         </router-link>
         <p
           v-if="product.stock == 0"
@@ -30,6 +34,7 @@
         >
         <div class="w-full min-h-0 mb-5 flex items-center justify-around">
           <button
+            @click="addToCart(product)"
             class="bg-cyan-500 hover:bg-cyan-400 rounded-sm duration-300 py-3 px-5"
           >
             Añadir <i class="fas fa-shopping-cart"></i>
@@ -39,7 +44,15 @@
           </p>
           <button
             @click="toggleDesired(product.id)"
-            :class="['border', 'border-cyan-600', 'py-2', 'px-3', 'hover:bg-cyan-400', 'duration-300', { 'text-red-500': isDesired(product.id) }]"
+            :class="[
+              'border',
+              'border-cyan-600',
+              'py-2',
+              'px-3',
+              'hover:bg-cyan-400',
+              'duration-300',
+              { 'text-red-500': isDesired(product.id) },
+            ]"
           >
             <i class="fas fa-heart"></i>
           </button>
@@ -62,7 +75,9 @@ export default {
     };
   },
   mounted() {
-    this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+    if (localStorage.getItem("userData")) {
+      this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+    }
 
     axios
       .get("http://127.0.0.1:8000/api/random-products")
@@ -85,11 +100,15 @@ export default {
   methods: {
     toggleDesired(product_id) {
       axios
-        .post(`http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`)
+        .post(
+          `http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`
+        )
         .then((response) => {
           console.log(response);
           if (this.isDesired(product_id)) {
-            this.desiredProducts = this.desiredProducts.filter(id => id !== product_id);
+            this.desiredProducts = this.desiredProducts.filter(
+              (id) => id !== product_id
+            );
           } else {
             this.desiredProducts.push(product_id);
           }
@@ -100,6 +119,32 @@ export default {
     },
     isDesired(product_id) {
       return this.desiredProducts.includes(product_id);
+    },
+    addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      if (!Array.isArray(cart)) {
+        cart = [];
+      }
+
+      let found = cart.find(item => item.id === product.id);
+
+      if (found) {
+        found.quantity += 1;
+        found.subtotal = found.quantity * product.price;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          subtotal: product.price,
+          image:product.image
+        });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      console.log(JSON.parse(localStorage.getItem('cart')));
     },
   },
 };

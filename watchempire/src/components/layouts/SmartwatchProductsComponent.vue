@@ -1,5 +1,7 @@
 <template>
-  <section class="w-5/6 h-auto m-auto mb-12 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  <section
+    class="w-5/6 h-auto m-auto mb-12 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+  >
     <div
       v-for="product in products"
       :key="product.id"
@@ -29,8 +31,10 @@
         >
           Añadir <i class="fas fa-shopping-cart"></i>
         </button>
-        <p class="text-cyan-600 text-center text-xl lg:text-2xl">{{ product.price }} $</p>
-       <button
+        <p class="text-cyan-600 text-center text-xl lg:text-2xl">
+          {{ product.price }} $
+        </p>
+        <button
           @click="toggleDesired(product.id)"
           :class="[
             'border',
@@ -61,7 +65,9 @@ export default {
     };
   },
   mounted() {
-    this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+    if (localStorage.getItem("userData")) {
+      this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+    }
     this.analogicalProducts();
   },
   methods: {
@@ -76,7 +82,7 @@ export default {
           console.error("Error:", error);
         });
     },
-     toggleDesired(product_id) {
+    toggleDesired(product_id) {
       axios
         .post(
           `http://127.0.0.1:8000/api/toggle-desired/${this.user_id}/${product_id}`

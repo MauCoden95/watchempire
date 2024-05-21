@@ -65,7 +65,9 @@ export default {
     };
   },
   mounted() {
-    this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+     if (localStorage.getItem("userData")) {
+      this.user_id = JSON.parse(localStorage.getItem("userData")).id;
+    }
     this.analogicalProducts();
   },
   methods: {

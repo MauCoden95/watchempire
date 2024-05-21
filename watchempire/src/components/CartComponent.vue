@@ -7,67 +7,73 @@
       </router-link>
     </div>
 
-    <div class="w-5/6 m-auto mt-8">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase">
-          <tr>
-            <th scope="col" class="w-2/5 text-xl px-6 py-6 text-center">Producto</th>
-            <th scope="col" class="w-1/6 text-xl px-6 py-6 text-center">Precio</th>
-            <th scope="col" class="text-xl px-6 py-6 text-center">Cantidad</th>
-            <th scope="col" class="text-xl px-6 py-6 text-center">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white border-b">
-            <th
-              scope="row"
-              class="w-full text-2xl px-6 py-4 text-center text-gray-900 font-medium whitespace-nowrap flex items-center justify-center"
-            >
-              <img class="w-1/5" src="../assets/img/lujo2.png" />
-              Reloj de Lujo 1
-            </th>
-            <td class="w-1/6 text-2xl px-6 py-4 text-center text-gray-900">65000 $</td>
-            <td class="text-2xl px-6 py-4 text-center text-gray-900">
-              <button class="w-8 h-8 rounded-md bg-gray-500 hover:bg-slate-700 mr-2 duration-300">
-                +
-              </button>
-              1
-              <button class="w-8 h-8 rounded-md bg-gray-500 hover:bg-slate-700 ml-2 duration-300">
-                -
-              </button>
-            </td>
-            <td class="text-2xl px-6 py-4 text-center text-gray-900">$2999</td>
-            <td class="">
-              <button class="fas fa-trash text-3xl px-8 text-red-500 hover:text-red-700"></button>
-            </td>
-          </tr>
-          <tr class="bg-white border-b">
-            <th
-              scope="row"
-              class="w-full text-2xl px-6 py-4 text-center text-gray-900 font-medium whitespace-nowrap flex items-center justify-center"
-            >
-              <img class="w-1/5" src="../assets/img/analogico7.png" />
-              Reloj Analogico 7
-            </th>
-            <td class="w-1/6 text-2xl px-6 py-4 text-center text-gray-900">45000 $</td>
-            <td class="text-2xl px-6 py-4 text-center text-gray-900">
-              <button class="w-8 h-8 rounded-md bg-gray-500 hover:bg-slate-700 mr-2 duration-300">
-                +
-              </button>
-              1
-              <button class="w-8 h-8 rounded-md bg-gray-500 hover:bg-slate-700 ml-2 duration-300">
-                -
-              </button>
-            </td>
-            <td class="text-2xl px-6 py-4 text-center text-gray-900">$2999</td>
-            <td class="">
-              <button class="fas fa-trash text-3xl px-8 text-red-500 hover:text-red-700"></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div v-if="cart.length >= 1">
+      <div class="w-5/6 m-auto mt-8">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+          <thead class="text-xs text-gray-700 uppercase">
+            <tr>
+              <th scope="col" class="w-2/5 text-xl px-6 py-6 text-center">
+                Producto
+              </th>
+              <th scope="col" class="w-1/6 text-xl px-6 py-6 text-center">
+                Precio
+              </th>
+              <th scope="col" class="text-xl px-6 py-6 text-center">
+                Cantidad
+              </th>
+              <th scope="col" class="text-xl px-6 py-6 text-center">
+                Subtotal
+              </th>
+            </tr>
+          </thead>
+          <tbody v-for="item in cart" :key="item.id">
+            <tr class="bg-white border-b">
+              <th
+                scope="row"
+                class="w-full text-2xl px-6 py-4 text-center text-gray-900 font-medium whitespace-nowrap flex items-center justify-center"
+              >
+                <img
+                  class="h-36 m-auto rounded-full object-cover transition duration-300 transform hover:scale-110"
+                  alt="Imagen de producto"
+                  :src="require('@/assets/img/' + item.image)"
+                />
+                {{ item.name }}
+              </th>
+              <td class="w-1/6 text-2xl px-6 py-4 text-center text-gray-900">
+                {{ item.price }} $
+              </td>
+              <td class="text-2xl px-6 py-4 text-center text-gray-900">
+                <button
+                  @click="addQuantity(item.id)"
+                  class="w-8 h-8 rounded-md bg-gray-500 hover:bg-slate-700 mr-2 duration-300"
+                >
+                  +
+                </button>
+                {{ item.quantity }}
+                <button
+                  @click="removeQuantity(item.id)"
+                  class="w-8 h-8 rounded-md bg-gray-500 hover:bg-slate-700 ml-2 duration-300"
+                >
+                  -
+                </button>
+              </td>
+              <td class="text-2xl px-6 py-4 text-center text-gray-900">
+                ${{ item.subtotal }}
+              </td>
+              <td class="">
+                <button
+                  @click="deleteItem(item.id)"
+                  class="fas fa-trash text-3xl px-8 text-red-500 hover:text-red-700"
+                ></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <div class="w-full h-56 bg-gray-300 mt-12 rounded-xl flex items-center justify-between">
+      <div
+        class="w-5/6 h-56 m-auto bg-gray-300 mt-12 rounded-xl flex items-center justify-between"
+      >
         <div class="w-2/5 h-full px-5">
           <h2 class="text-center text-2xl py-3">Elija modo de envío</h2>
 
@@ -80,7 +86,10 @@
               checked
               class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
-            <label for="default-checkbox" class="ms-2 text-base font-medium text-gray-900">
+            <label
+              for="default-checkbox"
+              class="ms-2 text-base font-medium text-gray-900"
+            >
               En el local = Gratis
             </label>
           </div>
@@ -92,7 +101,10 @@
               name="shopping"
               class="w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
-            <label for="checked-checkbox" class="ms-2 text-base font-medium text-gray-900">
+            <label
+              for="checked-checkbox"
+              class="ms-2 text-base font-medium text-gray-900"
+            >
               Envío a domicilio = 20% de recargo
             </label>
           </div>
@@ -111,6 +123,9 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <h2 class="text-2xl text-center my-7">No hay productos en el carrito</h2>
+    </div>
   </section>
 </template>
 
@@ -119,13 +134,37 @@ export default {
   name: "CartComponent",
   data() {
     return {
-      token: localStorage.getItem('token')
-    }
+      token: localStorage.getItem("token"),
+      cart: [],
+    };
   },
   mounted() {
+    this.cart = JSON.parse(localStorage.getItem("cart"));
+
     if (this.token == null) {
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: "/" });
     }
-  }
+  },
+  methods: {
+    deleteItem(productId) {
+      let find = this.cart.findIndex((item) => item.id == productId);
+      this.cart.splice(find, 1);
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+    },
+    addQuantity(productId){
+      let find = this.cart.find((item) => item.id == productId);
+      find.quantity++;
+      console.log(find);
+    },
+    removeQuantity(productId){
+      let find = this.cart.find((item) => item.id == productId);
+      
+      if(find.quantity == 1){
+        find.quantity == 1;
+      }else{
+        find.quantity--;
+      }     
+    }
+  },
 };
 </script>

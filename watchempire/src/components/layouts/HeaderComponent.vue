@@ -8,7 +8,7 @@
       <nav
         id="nav"
         :class="{ showMenu: nav, hiddenMenu: !nav }"
-        class="md:block absolute top-full md:relative md:top-0 w-full md:w-2/4 h-68 md:h-full"
+        class="md:block absolute top-full md:relative md:top-0 w-full md:w-2/4 h-68 md:h-full z-40"
       >
         <ul
           class="w-full h-full bg-zinc-950 py-3 px-3 mb-3 flex flex-col md:flex-row items-center justify-between"
@@ -206,6 +206,7 @@ export default {
       this.btnUser = false;
       localStorage.removeItem("token");
       localStorage.removeItem("userData");
+      localStorage.removeItem("cart");
       this.isLogged = false;
       this.$router.go("/");
     },
