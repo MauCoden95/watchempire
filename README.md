@@ -70,8 +70,14 @@ Los usuarios pueden explorar una amplia gama de relojes, agregar productos a su 
    3.3 La aplicación estará disponible en http://localhost:8080.
 
 
-   
 
+
+## Capturas de la página principal
+
+
+![Header y banner](https://i.ibb.co/CQs5cB7/imagen-2024-08-18-174412884.png)
+
+![Productos destacados](https://i.ibb.co/CQs5cB7/imagen-2024-08-18-174412884.png)
 
 
    
