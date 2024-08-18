@@ -1,6 +1,6 @@
 # Proyecto de ecommerce de relojes
 
-![E-commerce de Relojes](https://mauro-miguel.imgbb.com)
+![E-commerce de Relojes](https://ibb.co/cQXcBJF)
 
 Este proyecto es una plataforma de comercio electrónico para la venta de relojes. 
 Los usuarios pueden explorar una amplia gama de relojes, agregar productos a su carrito de compras, y realizar compras en línea. 
