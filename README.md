@@ -71,6 +71,26 @@ Los usuarios pueden explorar una amplia gama de relojes, agregar productos a su 
 
 
 
+## Autenticación con JWT
+
+La autenticación en este proyecto de ecommerce de relojes se implementa utilizando JSON Web Tokens (JWT), una solución segura y eficiente para manejar la autenticación de usuarios.
+
+### ¿Cómo Funciona en Este Proyecto?
+
+   #### Registro de Usuario:
+   
+   Cuando un nuevo usuario se registra, sus credenciales (como el correo electrónico y la contraseña) se almacenan de forma        segura en la base de datos después de ser encriptadas.
+   
+   #### Inicio de Sesión:
+   
+   Al iniciar sesión, el usuario envía sus credenciales (correo electrónico y contraseña).
+   Si las credenciales son válidas, el servidor genera un JWT, que incluye información del usuario como el ID, y lo firma          utilizando una clave secreta.
+   El token JWT se envía de vuelta al cliente (normalmente guardado en localStorage o sessionStorage).
+  
+   #### Cierre de Sesión:
+   
+   Para cerrar sesión, simplemente se elimina el JWT almacenado en el cliente, lo que revoca el acceso a los recursos              protegidos.
+   
 
 ## Capturas de la página principal
 
@@ -83,7 +103,8 @@ Los usuarios pueden explorar una amplia gama de relojes, agregar productos a su 
 
 ![Productos destacados](https://i.ibb.co/LtTWrsG/imagen-2024-08-18-183725716.png)
 
-
+<br><br>
+<br><br>
 
 ## Carrito de compras
 
