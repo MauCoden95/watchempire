@@ -41,7 +41,7 @@ export default {
     };
   },
   mounted() {
-    const futureDate = new Date('2024-05-21T23:59:59'); 
+    const futureDate = new Date('2024-08-25T23:59:59'); 
 
     
     setInterval(() => {

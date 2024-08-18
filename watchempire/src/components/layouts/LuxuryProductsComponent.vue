@@ -1,10 +1,17 @@
 <template>
-  <section class="w-5/6 h-auto m-auto mb-12 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  <section
+    class="w-5/6 h-auto m-auto mb-12 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+  >
     <div
       v-for="product in products"
       :key="product.id"
       class="relative bg-gray-200 p-2 rounded shadow-md"
     >
+      <router-link :to="`/producto/${product.id}`">
+        <i
+          class="cursor-pointer duration-300 absolute top-2 left-3 fas fa-info-circle text-3xl text-cyan-600 hover:text-cyan-800"
+        ></i>
+      </router-link>
       <p
         v-if="product.stock == 0"
         class="absolute right-2 top-2 w-16 h-16 rounded-full bg-cyan-600 text-white text-sm flex items-center justify-center"
@@ -30,8 +37,10 @@
         >
           Añadir <i class="fas fa-shopping-cart"></i>
         </button>
-        <p class="text-cyan-600 text-center text-xl lg:text-2xl">{{ product.price }} $</p>
-       <button
+        <p class="text-cyan-600 text-center text-xl lg:text-2xl">
+          {{ product.price }} $
+        </p>
+        <button
           @click="toggleDesired(product.id)"
           :class="[
             'border',
@@ -62,7 +71,7 @@ export default {
     };
   },
   mounted() {
-     if (localStorage.getItem("userData")) {
+    if (localStorage.getItem("userData")) {
       this.user_id = JSON.parse(localStorage.getItem("userData")).id;
     }
     this.analogicalProducts();
@@ -98,12 +107,12 @@ export default {
           .catch((error) => {
             console.error("Error:", error);
           });
-      }else{
-           this.$swal.fire({
-            title: "Debe estar logueado para añadir a la lista de deseados",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+      } else {
+        this.$swal.fire({
+          title: "Debe estar logueado para añadir a la lista de deseados",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
     isDesired(product_id) {
@@ -151,15 +160,14 @@ export default {
             confirmButtonText: "OK",
           });
         }
-      }else{        
-           this.$swal.fire({
-            title: "Debe estar logueado para agregar productos al carrito",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+      } else {
+        this.$swal.fire({
+          title: "Debe estar logueado para agregar productos al carrito",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
-  
   },
 };
 </script>

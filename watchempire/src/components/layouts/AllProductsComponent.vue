@@ -7,6 +7,11 @@
       :key="product.id"
       class="relative bg-gray-200 p-2 rounded shadow-md"
     >
+      <router-link :to="`/producto/${product.id}`">
+        <i
+          class="cursor-pointer duration-300 absolute top-2 left-3 fas fa-info-circle text-3xl text-cyan-600 hover:text-cyan-800"
+        ></i>
+      </router-link>
       <p
         v-if="product.stock == 0"
         class="absolute right-2 top-2 w-16 h-16 rounded-full bg-cyan-600 text-white text-sm flex items-center justify-center"
@@ -101,12 +106,12 @@ export default {
           .catch((error) => {
             console.error("Error:", error);
           });
-      }else{
-           this.$swal.fire({
-            title: "Debe estar logueado para añadir a la lista de deseados",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+      } else {
+        this.$swal.fire({
+          title: "Debe estar logueado para añadir a la lista de deseados",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
     isDesired(product_id) {
@@ -154,12 +159,12 @@ export default {
             confirmButtonText: "OK",
           });
         }
-      }else{        
-           this.$swal.fire({
-            title: "Debe estar logueado para agregar productos al carrito",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+      } else {
+        this.$swal.fire({
+          title: "Debe estar logueado para agregar productos al carrito",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
   },

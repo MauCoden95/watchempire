@@ -7,6 +7,11 @@
       :key="product.id"
       class="relative bg-gray-200 p-2 rounded shadow-md"
     >
+     <router-link :to="`/producto/${product.id}`">
+          <i
+            class="cursor-pointer duration-300 absolute top-2 left-3 fas fa-info-circle text-3xl text-cyan-600 hover:text-cyan-800"
+          ></i>
+        </router-link>
       <p
         v-if="product.stock == 0"
         class="absolute right-2 top-2 w-16 h-16 rounded-full bg-cyan-600 text-white text-sm flex items-center justify-center"

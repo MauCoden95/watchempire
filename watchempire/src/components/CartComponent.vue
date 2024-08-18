@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        <div class="w-2/5 h-full">
+        <div class="w-2/6 h-full">
           <h3 class="w-5/6 p-3 mt-5">
             Subtotal:
             <span class="float-right font-bold">{{ totalSubtotal }} $</span>
@@ -165,7 +165,7 @@
             TOTAL: <span class="float-right font-bold">{{ total }} $</span>
           </h2>
           <button
-            class="w-5/6 text-xl hover:before:bg-redborder-red-500 relative h-[50px] overflow-hidden border border-blue-800 bg-blue-300 px-3 text-blue-800 shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-blue-600 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
+            class="w-5/6 text-xl rounded-md hover:before:bg-redborder-red-500 relative h-[50px] overflow-hidden border border-blue-800 bg-blue-300 px-3 text-blue-800 shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-blue-600 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
           >
             <span class="relative z-10">Confirmar compra <i class="fas fa-shopping-bag"></i></span>
           </button>

@@ -8,47 +8,57 @@
       <nav
         id="nav"
         :class="{ showMenu: nav, hiddenMenu: !nav }"
-        class="md:block absolute top-full md:relative md:top-0 w-full md:w-2/4 h-68 md:h-full z-40"
+        class="fixed md:relative top-0 right-0 left-0 bottom-0 w-screen h-screen md:w-4/6 h-full md:ml-16 z-40 bg-gray-300 md:bg-transparent"
       >
+      
         <ul
-          class="w-full h-full bg-zinc-950 py-3 px-3 mb-3 flex flex-col md:flex-row items-center justify-between"
+          class="absolute w-5/6 h-full py-3 px-3 mb-3 flex flex-col md:flex-row items-center justify-start md:justify-between"
         >
+          <button id="btn_menu" @click="toggleMenu" class="block absolute top-24 right-3">
+            <i
+              class="block md:hidden fas fa-times text-black hover:text-cyan-700 duration-300 text-4xl"
+            ></i>
+          </button>
           <li
-            class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
+            class="cursor-pointer w-full md:w-auto mb-5 md:mb-0 ml-7 md:ml-0 text-left hover:text-cyan-600 duration-300 py-3"
           >
             <router-link
               to="/"
-              class="text-xl md:text-xs lg:text-base text-white hover:text-cyan-600"
+              @click="toggleMenu"
+              class="text-2xl md:text-xs lg:text-base text-black md:text-white hover:text-cyan-600"
               >Inicio</router-link
             >
           </li>
 
           <li
-            class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
+            class="cursor-pointer w-full md:w-auto mb-5 md:mb-0 ml-7 md:ml-0 text-left hover:text-cyan-600 duration-300 py-3"
           >
             <router-link
               to="/tienda"
-              class="text-xl md:text-xs lg:text-base text-white hover:text-cyan-600"
+              @click="toggleMenu"
+              class="text-2xl md:text-xs lg:text-base text-black md:text-white hover:text-cyan-600"
               >Tienda</router-link
             >
           </li>
 
           <li
-            class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
+            class="cursor-pointer w-full md:w-auto mb-5 md:mb-0 ml-7 md:ml-0 text-left hover:text-cyan-600 duration-300 py-3"
           >
             <router-link
               to="/"
-              class="text-xl md:text-xs lg:text-base text-white hover:text-cyan-600"
+              @click="toggleMenu"
+              class="text-2xl md:text-xs lg:text-base text-black md:text-white hover:text-cyan-600"
               >Blog</router-link
             >
           </li>
 
           <li
-            class="cursor-pointer w-full md:w-auto text-center hover:text-cyan-600 duration-300 py-3"
+            class="cursor-pointer w-full md:w-auto mb-5 md:mb-0 ml-7 md:ml-0 text-left hover:text-cyan-600 duration-300 py-3"
           >
             <router-link
               to="/contacto"
-              class="text-xl md:text-xs lg:text-base text-white hover:text-cyan-600"
+              @click="toggleMenu"
+              class="text-2xl md:text-xs lg:text-base text-black md:text-white hover:text-cyan-600"
               >Contacto</router-link
             >
           </li>
@@ -217,11 +227,11 @@ export default {
 <style>
 .hiddenMenu {
   transition: all 600ms;
-  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transform: translateX(100%);
 }
 .showMenu {
   transition: all 600ms;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transform: translateX(8%);
 }
 .hiddenUser {
   transition: all 600ms;
@@ -231,4 +241,16 @@ export default {
   transition: all 600ms;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
+
+
+@media (min-width: 768px){
+  .hiddenMenu {
+      transform: translate(0%);
+  }
+
+  .showMenu {
+      transform: translate(0%);
+  }
+}
+
 </style>
