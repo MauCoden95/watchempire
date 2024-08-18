@@ -77,7 +77,23 @@ Los usuarios pueden explorar una amplia gama de relojes, agregar productos a su 
 
 ![Header y banner](https://i.ibb.co/CQs5cB7/imagen-2024-08-18-174412884.png)
 
-![Productos destacados](https://i.ibb.co/CQs5cB7/imagen-2024-08-18-174412884.png)
+![Productos destacados](https://i.ibb.co/bsD26tr/imagen-2024-08-18-181507510.png)
+
+![Productos destacados](https://i.ibb.co/wR6Dh7V/imagen-2024-08-18-183554796.png)
+
+![Productos destacados](https://i.ibb.co/LtTWrsG/imagen-2024-08-18-183725716.png)
+
+
+
+## Carrito de compras
+
+![Productos destacados](https://i.ibb.co/nMfBnn7/imagen-2024-08-18-184341687.png)
+
+![Productos destacados](https://i.ibb.co/Yf61ZX9/imagen-2024-08-18-184907184.png)
+
+
+
+
 
 
    
