@@ -30,14 +30,13 @@ Los usuarios pueden explorar una amplia gama de relojes, agregar productos a su 
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/usuario/ecommerce-relojes.git
-   cd ecommerce-relojes
+   git clone https://github.com/MauCoden95/watchempire.git
+   cd watchempire
 
 
 2. Configurar el backend:
    ```bash
-       git clone https://github.com/usuario/ecommerce-relojes.git
-       cd ecommerce-relojes
+        cd backend
 
    2.1 Instalar las dependencias de Laravel(composer install)
 
