@@ -8,13 +8,13 @@ import App from "./App.vue";
 
 
 //Componentes
-import HomeComponent from "../src/components/HomeComponent.vue";
-import ContactComponent from "../src/components/ContactComponent.vue";
-import StoreComponent from "../src/components/StoreComponent.vue";
-import CartComponent from '../src/components/CartComponent.vue';
-import RegisterComponent from '../src/components/RegisterComponent.vue';
-import ProductoDetailComponent from '../src/components/ProductDetailComponent.vue';
-import MyDesiredsComponent from '../src/components/MyDesiredsComponent.vue'
+import HomeComponent from "../src/components/routes/HomeComponent.vue";
+import ContactComponent from "../src/components/routes/ContactComponent.vue";
+import StoreComponent from "../src/components/routes/StoreComponent.vue";
+import CartComponent from '../src/components/routes/CartComponent.vue';
+import RegisterComponent from '../src/components/routes/RegisterComponent.vue';
+import ProductoDetailComponent from '../src/components/routes/ProductDetailComponent.vue';
+import MyDesiredsComponent from '../src/components/routes/MyDesiredsComponent.vue'
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';

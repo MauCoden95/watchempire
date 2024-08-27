@@ -62,12 +62,12 @@
 </template>
 
 <script>
-import Featured from "./layouts/FeaturedComponent.vue";
-import AllProductsComponent from "./layouts/AllProductsComponent.vue";
-import AnalogicalProductsComponent from "./layouts/AnalogicalProductsComponent.vue";
-import WallProductsComponent from "./layouts/WallProductsComponent.vue";
-import LuxuryProductsComponent from "./layouts/LuxuryProductsComponent.vue";
-import SmartWatchProductsComponent from "./layouts/SmartwatchProductsComponent.vue";
+import Featured from "../layouts/FeaturedComponent.vue";
+import AllProductsComponent from "../layouts/AllProductsComponent.vue";
+import AnalogicalProductsComponent from "../layouts/AnalogicalProductsComponent.vue";
+import WallProductsComponent from "../layouts/WallProductsComponent.vue";
+import LuxuryProductsComponent from "../layouts/LuxuryProductsComponent.vue";
+import SmartWatchProductsComponent from "../layouts/SmartwatchProductsComponent.vue";
 
 
 export default {

@@ -8,7 +8,7 @@
       <nav
         id="nav"
         :class="{ showMenu: nav, hiddenMenu: !nav }"
-        class="fixed md:relative top-0 right-0 left-0 bottom-0 w-screen h-screen md:w-4/6 h-full md:ml-16 z-40 bg-gray-300 md:bg-transparent"
+        class="fixed md:relative top-0 right-0 left-0 bottom-0 w-screen h-screen md:w-4/6 md:h-20 md:ml-16 z-40 bg-gray-300 md:bg-transparent"
       >
       
         <ul

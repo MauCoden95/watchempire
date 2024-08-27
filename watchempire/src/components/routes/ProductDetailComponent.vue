@@ -9,7 +9,7 @@
       >
         Sin stock
       </p>
-      <img class="w-3/6" src="../assets/img/smartwatch6.png" />
+      <img class="w-3/6" src="../../assets/img/smartwatch6.png" />
       <div class="w-5/6 px-10 bg-gray-300 py-14 rounded-xl">
         <h2 class="text-3xl font-bold">{{ dataProduct.name }}</h2>
         <p class="text-xl my-5 text-justify">

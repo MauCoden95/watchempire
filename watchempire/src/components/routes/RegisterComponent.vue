@@ -59,7 +59,7 @@
 
       <img
         class="w-full lg:w-2/5"
-        src="../assets/img/register-image.svg"
+        src="../../assets/img/register-image.svg"
       />
     </section>
   </div>
