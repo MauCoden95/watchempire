@@ -89,24 +89,6 @@ export default {
         return accumulator + currentItem.subtotal;
       }, 0);
     },
-    total() {
-      if (this.check === "free") {
-        return this.totalSubtotal;
-      } else if (this.check === "shopping") {
-        return this.totalSubtotal * 1.2;
-      } else {
-        return this.totalSubtotal;
-      }
-    },
-    totalMessage() {
-      if (this.check === "free") {
-        return "Gratis";
-      } else if (this.check === "shopping") {
-        return "20% de recargo";
-      } else {
-        return "Gratis";
-      }
-    },
   },
 };
 </script>

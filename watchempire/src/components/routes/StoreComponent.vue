@@ -2,7 +2,7 @@
   <div>
     <h2 class="text-4xl text-center my-16">Tienda</h2>
     <section
-      class="w-4/6 min-h-0 lg:h-20 p-1.5 m-auto mb-12 rounded-xl lg:rounded-full bg-gray-400 flex flex-col lg:flex-row gap-2 items-center justify-between"
+      class="w-5/6 min-h-0 lg:h-20 p-1.5 m-auto mb-12 rounded-xl lg:rounded-full bg-gray-400 flex flex-col md:flex-row gap-2 items-center justify-between"
     >
       <button
         @click="changeCategory(1)"
