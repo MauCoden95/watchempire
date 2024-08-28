@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DesiredController;
+use App\Http\Controllers\SaleController;
+
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -39,3 +42,7 @@ Route::group(['middleware'=>'api'], function ($routes) {
     Route::post('/login', [UserController::class,'login']);
 });
 
+
+Route::group(['middleware'=>'api'], function ($routes) {
+    Route::post('/store_sale', [SaleController::class,'store']);
+});

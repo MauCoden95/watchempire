@@ -38,11 +38,7 @@ class UserController extends Controller
             $result = $user->save();
 
             if ($result) {
-                Mail::send('emails.confirmation_code', ['name' => $user->name, 'confirmation_code' => $random], function ($message) use ($user) {
-                    $message->from('noreply@yourdomain.com', 'Your App Name');
-                    $message->to($user->email, $user->name);
-                    $message->subject('Confirmación de Registro');
-                });
+               
 
                 return response()->json([
                     "status" => 200,

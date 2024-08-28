@@ -85,6 +85,9 @@ export default {
   },
   computed: {
     totalSubtotal() {
+      if (!this.cart || this.cart.length == 0) {
+        return 0;
+      }
       return this.cart.reduce((accumulator, currentItem) => {
         return accumulator + currentItem.subtotal;
       }, 0);

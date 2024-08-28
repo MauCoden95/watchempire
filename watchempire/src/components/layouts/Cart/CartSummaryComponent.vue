@@ -90,23 +90,55 @@
             </span>
           </label>
         </div>
-        <div v-if="dataCard === 'Card'" class="mt-5 my-7">
-          <input class="w-5/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700" type="number" placeholder="Número tarjeta"/>
-        </div>
-        <div v-if="dataCard === 'Card'" class="w-5/6 flex gap-4 justify-between mt-5 my-7">
-          <input class="w-3/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700" type="number" placeholder="Código"/>
-          <input class="w-3/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700" type="number" placeholder="MM/AA"/>
-        </div>
-        <h2 class="w-5/6 p-3 mb-5 bg-cyan-400 rounded-lg">
-          TOTAL: <span class="float-right font-bold">{{ totalPrice }} $</span>
-        </h2>
-        <button
-          class="w-5/6 text-xl rounded-md hover:before:bg-redborder-red-500 relative h-[50px] overflow-hidden border border-blue-800 bg-blue-300 px-3 text-blue-800 shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-blue-600 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
-        >
-          <span class="relative z-10 text-base"
-            >Confirmar compra <i class="fas fa-shopping-bag text-base"></i
-          ></span>
-        </button>
+        <form>
+          <div v-if="dataCard === 'Card'" class="mt-5 mb-3">
+            <input
+              v-model="cardNumber"
+              class="w-5/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700"
+              type="number"
+              placeholder="Número tarjeta"
+            />
+          </div>
+          <div v-if="dataCard === 'Card'" class="mt-5 mb-3">
+            <input
+              v-model="cardName"
+              class="w-5/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700"
+              type="text"
+              placeholder="Titular tarjeta"
+            />
+          </div>
+          <div
+            v-if="dataCard === 'Card'"
+            class="w-5/6 flex gap-4 justify-between mt-2 mb-7"
+          >
+            <input
+              class="w-3/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700"
+              type="number"
+              placeholder="Código"
+              v-model="code"
+              min="000"
+              max="999"
+            />
+            <input
+              class="w-3/6 p-1.5 mt-3 bg-gray-200 focus:outline-none border-b-4 border-cyan-700"
+              type="text"
+              v-model="cardValid"
+              placeholder="MM/AA"
+            />
+          </div>
+          <h2 class="w-5/6 p-3 mb-5 bg-cyan-400 rounded-lg">
+            TOTAL: <span class="float-right font-bold">{{ totalPrice }} $</span>
+          </h2>
+          <button
+            type="button"
+            @click="sendBuy($event, cardNumber)"
+            class="w-5/6 text-xl rounded-md hover:before:bg-redborder-red-500 relative h-[50px] overflow-hidden border border-blue-800 bg-blue-300 px-3 text-blue-800 shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-blue-600 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
+          >
+            <span class="relative z-10 text-base"
+              >Confirmar compra <i class="fas fa-shopping-bag text-base"></i
+            ></span>
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -114,6 +146,8 @@
 
 
 <script>
+import axios from "axios";
+
 export default {
   props: {
     totalSubtotal: [Number],
@@ -122,13 +156,106 @@ export default {
   },
   data() {
     return {
-      check: 'free',
-      pay: 'cash'
+      check: "free",
+      pay: "cash",
+      cardNumber: 0,
+      cardName: "",
+      cardValid: "",
+      code: 0,
     };
   },
+  methods: {
+    validateCreditCard(num) {
+      let numStr = num.toString();
+      let cardName = this.cardName;
+      let code = this.code;
+      let [cardMonth, cardYear] = this.cardValid.split("/").map(Number);
+      cardYear += 2000; 
+      
+      let errors = [];
+      
+      
+      const today = new Date();
+      const currentMonth = today.getMonth() + 1;
+      const currentYear = today.getFullYear(); 
+
+      
+      if (numStr.length < 16) {
+        errors.push("Número de tarjeta inválido");
+      }
+
+      
+      if (cardName == "") {
+        errors.push("Ingrese un nombre válido");
+      }
+
+     
+      if (code == "") {
+        errors.push("Código inválido");
+      }
+
+     
+      if (isNaN(cardMonth) || isNaN(cardYear)) {
+        errors.push("Fecha de vencimiento inválida");
+      } else if (cardYear < currentYear || (cardYear === currentYear && cardMonth < currentMonth)) {
+        errors.push("La tarjeta está vencida");
+      }
+
+      if (errors.length > 0) {
+        return errors;
+      } else {
+        return true;
+      }
+    },
+    sendBuy(e, num) {
+      e.preventDefault();
+      let date = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+      let hour = `${hours}:${minutes}:${seconds}`;
+      let dateSale = `${year}-${month}-${day}`;
+      let user = JSON.parse(localStorage.getItem("userData"))
+      let saleData = {
+        user_id: parseInt(user.id),
+        total: this.totalPrice,
+        date: dateSale,
+        hour: hour,
+        payment_method: this.pay
+      };
+
+      if (this.pay == "card") {
+        let cardVerify = this.validateCreditCard(num);
+
+        if (cardVerify != true) {
+          this.$swal.fire({
+            title: "Error",
+            text: "No se pudo procesar la compra",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        } else {
+          //console.log(typeof saleData.paymentMethod);
+        axios.post('http://127.0.0.1:8000/api/store_sale', saleData)
+               .then((response) => {
+                  console.log(response);
+               })
+        }
+      }else{
+        axios.post('http://127.0.0.1:8000/api/store_sale', saleData)
+               .then((response) => {
+                  console.log(response);
+               })
+      }
+    },
+  },
   computed: {
-    subtotal_price(){
-        if (this.check === "free") {
+    subtotal_price() {
+      if (this.check === "free") {
         return this.totalSubtotal;
       } else if (this.check === "shopping") {
         return this.totalSubtotal * 1.2;
@@ -136,8 +263,8 @@ export default {
         return this.totalSubtotal;
       }
     },
-    message(){
-        if (this.check === "free") {
+    message() {
+      if (this.check === "free") {
         return "Gratis";
       } else if (this.check === "shopping") {
         return "20% de recargo";
@@ -145,16 +272,17 @@ export default {
         return "Gratis";
       }
     },
-    totalPrice(){
+    totalPrice() {
       return this.subtotal_price;
     },
-    dataCard(){
-        if(this.pay === "card"){
-          return "Card"
-        } else {
-          return "Cash"
-        }
-    }
-  }
+    dataCard() {
+      if (this.pay === "card") {
+        return "Card";
+      } else {
+        return "Cash";
+      }
+    },
+  },
+  
 };
 </script>

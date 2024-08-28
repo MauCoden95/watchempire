@@ -28,7 +28,30 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $sale = new Sale();
+
+        $sale->user_id = $data["user_id"];
+        $sale->total = $data["total"];
+        $sale->date = $data["date"];
+        $sale->hour = $data["hour"];
+        $sale->payment_method = $data["payment_method"];
+     
+
+        $save_sale = $sale->save();
+      
+
+        if ($sale) {
+            return response()->json([
+                "message" => "Compra guardada!!!"
+            ]);
+        }else{
+            return response()->json([
+                "message" => "Error"
+            ]);
+        }
+
+        
     }
 
     /**
