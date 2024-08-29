@@ -153,6 +153,7 @@ export default {
     totalSubtotal: [Number],
     totalMessage: [String],
     total: [String],
+    cart: Array,
   },
   data() {
     return {
@@ -170,34 +171,32 @@ export default {
       let cardName = this.cardName;
       let code = this.code;
       let [cardMonth, cardYear] = this.cardValid.split("/").map(Number);
-      cardYear += 2000; 
-      
+      cardYear += 2000;
+
       let errors = [];
-      
-      
+
       const today = new Date();
       const currentMonth = today.getMonth() + 1;
-      const currentYear = today.getFullYear(); 
+      const currentYear = today.getFullYear();
 
-      
       if (numStr.length < 16) {
         errors.push("Número de tarjeta inválido");
       }
 
-      
       if (cardName == "") {
         errors.push("Ingrese un nombre válido");
       }
 
-     
       if (code == "") {
         errors.push("Código inválido");
       }
 
-     
       if (isNaN(cardMonth) || isNaN(cardYear)) {
         errors.push("Fecha de vencimiento inválida");
-      } else if (cardYear < currentYear || (cardYear === currentYear && cardMonth < currentMonth)) {
+      } else if (
+        cardYear < currentYear ||
+        (cardYear === currentYear && cardMonth < currentMonth)
+      ) {
         errors.push("La tarjeta está vencida");
       }
 
@@ -207,52 +206,104 @@ export default {
         return true;
       }
     },
+
+    messageResponse(status, ...empty) {
+      if (status == "success") {
+        this.$swal.fire({
+          text: "Compra realizada",
+          title: "Felicidades!!!",
+          icon: "success",
+        });
+      } else {
+        this.$swal.fire({
+          title: "Error",
+          text: "No se pudo procesar la compra o campos vacíos",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
+
+      if (empty != "") {
+        this.$swal.fire({
+          title: "Error",
+          text: "Carrito vacío",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    },
+
     sendBuy(e, num) {
       e.preventDefault();
-      let date = new Date();
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
+      if (this.subtotal_price != 0) {
+        let date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
 
-      const hours = String(date.getHours()).padStart(2, "0");
-      const minutes = String(date.getMinutes()).padStart(2, "0");
-      const seconds = String(date.getSeconds()).padStart(2, "0");
-      let hour = `${hours}:${minutes}:${seconds}`;
-      let dateSale = `${year}-${month}-${day}`;
-      let user = JSON.parse(localStorage.getItem("userData"))
-      let saleData = {
-        user_id: parseInt(user.id),
-        total: this.totalPrice,
-        date: dateSale,
-        hour: hour,
-        payment_method: this.pay
-      };
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        const seconds = String(date.getSeconds()).padStart(2, "0");
+        let hour = `${hours}:${minutes}:${seconds}`;
+        let dateSale = `${year}-${month}-${day}`;
+        let user = JSON.parse(localStorage.getItem("userData"));
+        let saleData = {
+          user_id: parseInt(user.id),
+          total: this.totalPrice,
+          date: dateSale,
+          hour: hour,
+          payment_method: this.pay,
+        };
 
-      if (this.pay == "card") {
-        let cardVerify = this.validateCreditCard(num);
-
-        if (cardVerify != true) {
-          this.$swal.fire({
-            title: "Error",
-            text: "No se pudo procesar la compra",
-            icon: "error",
-            confirmButtonText: "Aceptar",
+        const saveProducts = (saleId) => {
+          this.cart.forEach((product) => {
+            console.log(typeof saleId);
+            console.log(typeof product.id);
+            console.log(typeof product.quantity);
+            axios
+              .post("http://127.0.0.1:8000/api/store_sales_product", {
+                sale_id: saleId,
+                product_id: product.id,
+                quantity: product.quantity,
+              })
+              .then(() => {})
+              .catch((err) => {
+                alert(err);
+              });
           });
+        };
+
+        if (this.pay == "card") {
+          let cardVerify = this.validateCreditCard(num);
+
+          if (cardVerify != true) {
+            this.messageResponse("Failed");
+          } else {
+            axios
+              .post("http://127.0.0.1:8000/api/store_sale", saleData)
+              .then((response) => {
+                this.messageResponse("success");
+
+                const saleId = response.data.sale_id;
+                saveProducts(saleId);
+              });
+          }
         } else {
-          //console.log(typeof saleData.paymentMethod);
-        axios.post('http://127.0.0.1:8000/api/store_sale', saleData)
-               .then((response) => {
-                  console.log(response);
-               })
+          axios
+            .post("http://127.0.0.1:8000/api/store_sale", saleData)
+            .then((response) => {
+              this.messageResponse("success");
+
+              const saleId = response.data.sale_id;
+              saveProducts(saleId);
+            });
         }
-      }else{
-        axios.post('http://127.0.0.1:8000/api/store_sale', saleData)
-               .then((response) => {
-                  console.log(response);
-               })
+      } else {
+        this.messageResponse("success", "Carrito vacío");
       }
     },
   },
+
   computed: {
     subtotal_price() {
       if (this.check === "free") {
@@ -283,6 +334,5 @@ export default {
       }
     },
   },
-  
 };
 </script>

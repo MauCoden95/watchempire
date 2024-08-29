@@ -30,30 +30,27 @@ class SaleController extends Controller
     {
         $data = $request->all();
         $sale = new Sale();
-
+    
         $sale->user_id = $data["user_id"];
         $sale->total = $data["total"];
         $sale->date = $data["date"];
         $sale->hour = $data["hour"];
         $sale->payment_method = $data["payment_method"];
-     
-
+    
         $save_sale = $sale->save();
-      
-
-        if ($sale) {
+    
+        if ($save_sale) {  
             return response()->json([
-                "message" => "Compra guardada!!!"
+                "message" => "Compra guardada!!!",
+                "sale_id" => $sale->id  
             ]);
-        }else{
+        } else {
             return response()->json([
                 "message" => "Error"
             ]);
         }
-
-        
     }
-
+    
     /**
      * Display the specified resource.
      */

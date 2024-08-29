@@ -28,7 +28,22 @@ class SalesProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $salesProduct = new SalesProduct();
+
+        $salesProduct->sale_id = $data['sale_id'];
+        $salesProduct->product_id = $data['product_id'];
+        $salesProduct->quantity = $data['quantity'];
+
+
+        $save = $salesProduct->save();
+
+        if ($save) {
+            return response()->json([
+                "message" => "Compra guardada!!!"
+            ]);
+        }
+
     }
 
     /**

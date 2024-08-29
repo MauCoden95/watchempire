@@ -68,7 +68,7 @@
       <h2 class="text-2xl text-center my-7">No hay productos en el carrito</h2>
     </div>
 
-    <CartSummaryComponent  :total=total :totalMessage=totalMessage :totalSubtotal=totalSubtotal />
+    <CartSummaryComponent :cart=cart :total=total :totalMessage=totalMessage :totalSubtotal=totalSubtotal />
   </div>
 </template>
 
