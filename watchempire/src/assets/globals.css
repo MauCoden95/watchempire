@@ -28,3 +28,11 @@
         transform: rotateY('180deg');
     }
 }
+
+.product_info{
+    z-index: 100;
+}
+
+.login{
+    z-index: 300;
+}

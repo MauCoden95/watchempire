@@ -49,7 +49,9 @@
         <h3 class="w-5/6 p-3 mt-2 mb-7">
           Envío: <span class="float-right font-bold">{{ message }}</span>
         </h3>
+
         <h3 class="text-xl font-bold">Métodos de pago</h3>
+
         <div class="flex items-center my-4">
           <input
             id="cash-checkbox"
@@ -90,6 +92,7 @@
             </span>
           </label>
         </div>
+
         <form>
           <div v-if="dataCard === 'Card'" class="mt-5 mb-3">
             <input
@@ -129,16 +132,13 @@
           <h2 class="w-5/6 p-3 mb-5 bg-cyan-400 rounded-lg">
             TOTAL: <span class="float-right font-bold">{{ totalPrice }} $</span>
           </h2>
-          <button
-            type="button"
-            @click="sendBuy($event, cardNumber)"
-            class="w-5/6 text-xl rounded-md hover:before:bg-redborder-red-500 relative h-[50px] overflow-hidden border border-blue-800 bg-blue-300 px-3 text-blue-800 shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-blue-600 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
-          >
-            <span class="relative z-10 text-base"
-              >Confirmar compra <i class="fas fa-shopping-bag text-base"></i
-            ></span>
-          </button>
+
+          <ConfirmBuyComponent :sendBuy="sendBuy" />
         </form>
+
+        <div class="mt-6" v-if="generateInvoice == true">
+          <GenerateInvoicesComponent />
+        </div>
       </div>
     </div>
   </div>
@@ -147,8 +147,14 @@
 
 <script>
 import axios from "axios";
+import ConfirmBuyComponent from "./ConfirmBuyComponent.vue";
+import GenerateInvoicesComponent from "../GenerateInvoicesComponent.vue";
 
 export default {
+  components: {
+    ConfirmBuyComponent,
+    GenerateInvoicesComponent,
+  },
   props: {
     totalSubtotal: [Number],
     totalMessage: [String],
@@ -163,6 +169,7 @@ export default {
       cardName: "",
       cardValid: "",
       code: 0,
+      generateInvoice: false,
     };
   },
   methods: {
@@ -214,6 +221,7 @@ export default {
           title: "Felicidades!!!",
           icon: "success",
         });
+        this.generateInvoice = true;
       } else {
         this.$swal.fire({
           title: "Error",
@@ -332,7 +340,7 @@ export default {
       } else {
         return "Cash";
       }
-    },
+    }
   },
 };
 </script>

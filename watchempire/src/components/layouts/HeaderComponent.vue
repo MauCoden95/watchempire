@@ -80,7 +80,7 @@
       <div v-if="isLogged">
         <div
           :class="{ showUser: btnUser, hiddenUser: !btnUser }"
-          class="absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
+          class="login absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
         >
           <h3 class="text-center my-3">Bienvenido, {{user.name}}</h3>
             <router-link @click="btnUser = false"
@@ -105,7 +105,7 @@
         <form
           @submit.prevent="handleSubmit"
           :class="{ showUser: btnUser, hiddenUser: !btnUser }"
-          class="absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
+          class="login absolute top-full right-0 w-60 h-auto bg-gray-200 rounded-lg"
         >
           <h2 class="text-center text-2xl my-1">Login</h2>
           <input

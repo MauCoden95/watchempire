@@ -39,11 +39,13 @@ export default {
       let find = this.cart.find((item) => item.id == productId);
       find.quantity++;
       find.subtotal = find.quantity * find.price;
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     removeQuantity(productId) {
       let find = this.cart.find((item) => item.id == productId);
       find.quantity == 1 ? find.quantity == 1 : find.quantity--;
       find.subtotal = find.quantity * find.price;
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },
   
