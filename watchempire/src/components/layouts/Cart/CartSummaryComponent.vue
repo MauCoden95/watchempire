@@ -241,7 +241,7 @@ export default {
       }
     },
 
-    sendBuy(e, num) {
+    sendBuy(e) {
       e.preventDefault();
       if (this.subtotal_price != 0) {
         let date = new Date();
@@ -282,7 +282,7 @@ export default {
         };
 
         if (this.pay == "card") {
-          let cardVerify = this.validateCreditCard(num);
+          let cardVerify = this.validateCreditCard(this.cardNumber);
 
           if (cardVerify != true) {
             this.messageResponse("Failed");
@@ -340,7 +340,7 @@ export default {
       } else {
         return "Cash";
       }
-    }
+    },
   },
 };
 </script>

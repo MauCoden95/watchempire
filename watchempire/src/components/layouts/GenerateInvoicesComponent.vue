@@ -6,7 +6,7 @@
       class="w-5/6 py-3 bg-teal-500 hover:bg-teal-300 duration-300"
       @click="generatePDF"
     >
-      Descargar factura <i class="fas fa-donwload"></i>
+      Descargar factura <i class="fas fa-download"></i>
     </button>
   </div>
 </template>
@@ -16,6 +16,14 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
 export default {
+  data(){
+    return{
+      cart: []
+    }
+  },
+  mounted(){
+    this.cart = JSON.parse(localStorage.getItem("cart"));
+  },
   methods: {
     generatePDF() {
       const content = this.$refs.pdfContent;
@@ -53,27 +61,23 @@ export default {
         pdf.text("Producto", 40, 220);
         pdf.text("Cantidad", 200, 220);
         pdf.text("Precio", 320, 220);
-        pdf.text("Total", 420, 220);
+        pdf.text("Subtotal", 420, 220);
         
 
-        const items = [
-          { name: "Producto A", quantity: 2, price: 50, total: 100 },
-          { name: "Producto B", quantity: 1, price: 150, total: 150 },
-        ];
 
         let yPosition = 240;
-        items.forEach((item) => {
+        this.cart.forEach((item) => {
           pdf.text(item.name, 40, yPosition);
           pdf.text(item.quantity.toString(), 200, yPosition);
           pdf.text(`$${item.price}`, 320, yPosition);
-          pdf.text(`$${item.total}`, 420, yPosition);
+          pdf.text(`$${item.subtotal}`, 420, yPosition);
           yPosition += 20;
         });
 
         pdf.setFontSize(14);
         pdf.text("Total:", 320, yPosition);
         pdf.text(
-          `$${items.reduce((sum, item) => sum + item.total, 0)}`,
+          `$${this.cart.reduce((sum, item) => sum + item.subtotal, 0)}`,
           420,
           yPosition
         );
