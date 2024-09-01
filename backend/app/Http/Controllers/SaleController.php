@@ -50,6 +50,15 @@ class SaleController extends Controller
             ]);
         }
     }
+
+
+    public function getSalesByUserID($user_id){
+        $sales = Sale::where('user_id',$user_id)->get();
+
+        return response()->json([
+            "sales" => $sales
+        ]);
+    }
     
     /**
      * Display the specified resource.

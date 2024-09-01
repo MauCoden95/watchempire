@@ -93,6 +93,11 @@
               class="block w-5/6 m-auto my-3 text-xl rounded-lg bg-gray-300 hover:bg-gray-400 duration-300 text-center p-3"
               >Mi carrito</router-link
             >
+             <router-link @click="btnUser = false"
+              to="/mis-compras"
+              class="block w-5/6 m-auto my-3 text-xl rounded-lg bg-gray-300 hover:bg-gray-400 duration-300 text-center p-3"
+              >Mis compras</router-link
+            >
           <button
             @click="handleLogout"
             class="block w-5/6 m-auto my-3 text-xl rounded-lg bg-red-600 hover:bg-red-800 duration-300 text-center p-3"

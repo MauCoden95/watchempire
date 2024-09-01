@@ -20,4 +20,10 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'desireds', 'product_id', 'user_id');
     }
+
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class, 'sales_products')
+                    ->withPivot('quantity');
+    }
 }

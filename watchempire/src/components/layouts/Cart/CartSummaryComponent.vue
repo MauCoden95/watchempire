@@ -148,7 +148,7 @@
 <script>
 import axios from "axios";
 import ConfirmBuyComponent from "./ConfirmBuyComponent.vue";
-import GenerateInvoicesComponent from "../GenerateInvoicesComponent.vue";
+import GenerateInvoicesComponent from "./GenerateInvoicesComponent.vue";
 
 export default {
   components: {
@@ -294,6 +294,7 @@ export default {
 
                 const saleId = response.data.sale_id;
                 saveProducts(saleId);
+                localStorage.removeItem('cart');
               });
           }
         } else {
@@ -304,6 +305,7 @@ export default {
 
               const saleId = response.data.sale_id;
               saveProducts(saleId);
+              localStorage.removeItem('cart');
             });
         }
       } else {

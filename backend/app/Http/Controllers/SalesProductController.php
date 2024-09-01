@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
 use App\Models\SalesProduct;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,40 @@ class SalesProductController extends Controller
             ]);
         }
 
+    }
+
+    
+ 
+    public function getProductsByUserAndSale($userId, $saleId)
+    {
+    
+        $sale = Sale::where('id', $saleId)
+                    ->where('user_id', $userId)
+                    ->with('products')
+                    ->first();
+
+    
+        if (!$sale) {
+            return response()->json([
+                "message" => "No se encontró la compra para este usuario."
+            ], 404);
+        }
+
+        
+        $products = $sale->products->map(function($product) {
+            return [
+                'product_name' => $product->name,
+                'product_price' => $product->price,
+                'quantity' => $product->pivot->quantity,
+                'image' => $product->image,
+                'subtotal' => $product->price * $product->pivot->quantity
+            ];
+        });
+
+        return response()->json([
+            "message" => "Productos obtenidos con éxito.",
+            "products" => $products
+        ], 200);
     }
 
     /**

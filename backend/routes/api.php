@@ -46,9 +46,12 @@ Route::group(['middleware'=>'api'], function ($routes) {
 
 Route::group(['middleware'=>'api'], function ($routes) {
     Route::post('/store_sale', [SaleController::class,'store']);
+    Route::get('/get_sales_by_user_id/{id}', [SaleController::class,'getSalesByUserID']);
 });
 
 
 Route::group(['middleware'=>'api'], function ($routes) {
     Route::post('/store_sales_product', [SalesProductController::class,'store']);
+    Route::get('/user/{userId}/sale/{saleId}/products', [SalesProductController::class, 'getProductsByUserAndSale']);
+
 });

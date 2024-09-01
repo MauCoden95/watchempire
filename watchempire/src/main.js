@@ -15,6 +15,9 @@ import CartComponent from '../src/components/routes/CartComponent.vue';
 import RegisterComponent from '../src/components/routes/RegisterComponent.vue';
 import ProductoDetailComponent from '../src/components/routes/ProductDetailComponent.vue';
 import MyDesiredsComponent from '../src/components/routes/MyDesiredsComponent.vue'
+import MyPurchasesComponent from '../src/components/routes/MyPurchasesComponent.vue'
+import DetailPurchaseComponent from '../src/components/routes/DetailPurchaseComponent.vue';
+
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -27,7 +30,9 @@ const routes = [
   { path: "/carrito", component: CartComponent },
   { path: "/registro", component: RegisterComponent },
   { path: "/producto/:id", component: ProductoDetailComponent },
-  { path: "/mis-deseados", component: MyDesiredsComponent }
+  { path: "/mis-deseados", component: MyDesiredsComponent },
+  { path: "/mis-compras", component: MyPurchasesComponent },
+  { path: "/detalle-compra", component: DetailPurchaseComponent },
 ];
 
 //Crear objeto rutas
