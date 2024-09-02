@@ -17,7 +17,7 @@ import ProductoDetailComponent from '../src/components/routes/ProductDetailCompo
 import MyDesiredsComponent from '../src/components/routes/MyDesiredsComponent.vue'
 import MyPurchasesComponent from '../src/components/routes/MyPurchasesComponent.vue'
 import DetailPurchaseComponent from '../src/components/routes/DetailPurchaseComponent.vue';
-
+import LoginAdminComponent from "./components/routes/LoginAdminComponent.vue";
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -33,6 +33,7 @@ const routes = [
   { path: "/mis-deseados", component: MyDesiredsComponent },
   { path: "/mis-compras", component: MyPurchasesComponent },
   { path: "/detalle-compra", component: DetailPurchaseComponent },
+  { path: "/login-admin", component: LoginAdminComponent },
 ];
 
 //Crear objeto rutas

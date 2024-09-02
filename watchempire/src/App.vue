@@ -1,8 +1,8 @@
 <template>
   <div>
-      <Header />
-      <router-view></router-view>
-      <Footer /> 
+    <Header v-if="!isLoginAdmin" />
+    <router-view></router-view>
+    <Footer v-if="!isLoginAdmin" />
   </div>
 </template>
 
@@ -15,11 +15,15 @@ export default {
   components: {
     Header,
     Footer
+  },
+  computed: {
+    isLoginAdmin() {
+      return this.$route.path === '/login-admin';
+    }
   }
 }
 
 //250 x 360
 </script>
 
-<style>
-</style>  
+<style></style>

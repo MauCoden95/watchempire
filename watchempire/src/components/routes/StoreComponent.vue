@@ -84,7 +84,6 @@ export default {
       nro: 1,
     };
   },
-  mounted() {},
   methods: {
     changeCategory(categoryNumber) {
       this.nro = categoryNumber;
